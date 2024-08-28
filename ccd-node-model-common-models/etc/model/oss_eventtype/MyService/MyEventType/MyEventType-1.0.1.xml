@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oss_event:EventTypeDefinition
+	oss_common:ns="MyService" oss_common:name="MyEventType"
+	oss_common:version="1.0.1" xmlns:oss_common="urn:com:ericsson:schema:xml:oss:oss_common"
+	xmlns:oss_event="urn:com:ericsson:schema:xml:oss:oss_eventtype"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<oss_common:modelCreationInfo author="eotilid"
+		creationDate="29th March 2016">
+		<oss_common:designedModel componentId="Modeling SDK" />
+	</oss_common:modelCreationInfo>
+
+	<oss_common:desc>This is an example handwritten model of schema oss_eventtype</oss_common:desc>
+
+	<oss_event:attribute oss_common:name="anEventAttribute">
+		<oss_common:desc>firstAttribute</oss_common:desc>
+		<oss_common:type xsi:type="oss_common:longType" />
+	</oss_event:attribute>
+
+	<oss_event:property name="anEventProperty">
+		<oss_event:value xsi:type="oss_common:integerValue"
+			value="45" />
+	</oss_event:property>
+
+</oss_event:EventTypeDefinition>

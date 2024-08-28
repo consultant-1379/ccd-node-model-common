@@ -1,0 +1,147 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ericsson.oss.mediation.model.nrm.function</groupId>
+		<artifactId>ccd-node-model-common</artifactId>
+		<version>1.2.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>ERICccdnodemodelcommon_CXP9043590</artifactId>
+	<packaging>rpm</packaging>
+	<name>[${project.parent.artifactId}] RPM module</name>
+	<description>RPM module</description>
+	<properties>
+		<!-- CI needed properties for release job -->
+		<maven.site.skip>true</maven.site.skip>
+		<maven.site.deploy.skip>true</maven.site.deploy.skip>
+		<!-- RPM build properties -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<rpm.name>${project.artifactId}</rpm.name>
+		<rpm.version>${project.version}</rpm.version>
+		<!-- Depending on the type of model this path can be of two types -->
+		<!-- /var/opt/ericsson/ERICmodeldeployment/data/install -->
+		<!-- /var/opt/ericsson/ERICmodeldeployment/data/post-install -->
+		<model-install-path>/var/opt/ericsson/ERICmodeldeployment/data/install</model-install-path>
+		<publish_artifact>true</publish_artifact>
+		<media.category>model</media.category>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>timestamp-property</id>
+						<goals>
+							<goal>timestamp-property</goal>
+						</goals>
+						<configuration>
+							<name>this.year</name>
+							<pattern>yyyy</pattern>
+							<unit>year</unit>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-ccd-node-model-common-jar</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+							    	<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.parent.artifactId}-models</artifactId>
+									<version>${project.version}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>target/opt/ericsson/ccd_nrm_function/models</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.ericsson.oss.mediation.model.ci</groupId>
+									<artifactId>${project.parent.artifactId}-ci-model-jar</artifactId>
+									<version>${project.version}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>target/opt/ericsson/ccd_nrm_function/models</outputDirectory>
+									<destFileName>${project.parent.artifactId}-ci-model-jar-${project.version}.jar</destFileName>
+								</artifactItem>
+								 <artifactItem>
+                                    <groupId>com.ericsson.oss.mediation.model.ci</groupId>
+                                    <artifactId>${project.parent.artifactId}-ci-model-jar</artifactId>
+									<version>${project.version}</version>
+                                    <classifier>xml</classifier>
+                                    <outputDirectory>target/opt/ericsson/ccd_nrm_function/models</outputDirectory>
+									<destFileName>${project.parent.artifactId}-ci-model-jar-${project.version}-xml.jar</destFileName>
+                                </artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rpm-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration combine.self="override">
+					<license>${this.year} Ericsson AB. All rights reserved</license>
+					<name>${rpm.name}</name>
+					<versionProperty>${rpm.version}</versionProperty>
+					<group>ERI-NMS</group>
+					<release>2</release>
+					<vendor>Ericsson AB</vendor>
+					<summary>${project.artifactId}</summary>
+					<mappings>
+						<mapping>
+							<directory>${model-install-path}</directory>
+							<filemode>754</filemode>
+							<username>mdtuser</username>
+							<groupname>mdt</groupname>
+							<configuration>false</configuration>
+							<!-- directoryIncluded should always be set to 'false' -->
+							<directoryIncluded>false</directoryIncluded>
+							<recurseDirectories>true</recurseDirectories>
+							<sources>
+								<source>
+									<location>target/${project.parent.artifactId}/models</location>
+									<location>target/opt/ericsson/ccd_nrm_function/models/</location>
+									<includes>
+										<include>**/*</include>
+									</includes>
+								</source>
+							</sources>
+						</mapping>
+					</mappings>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.ericsson.oss.itpf.deployment</groupId>
+				<artifactId>deployment-descriptor-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>configurable-entity</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<configEntity>
+						<stereotype>MODEL_PKG</stereotype>
+						<parameters>
+							<itemType name="model-package">
+								<property name="name" defaultValue="ERICccdnodemodelcommon_CXP9043590" />
+							</itemType>
+						</parameters>
+					</configEntity>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

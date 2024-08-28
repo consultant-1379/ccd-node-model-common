@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	 <parent>
+             <groupId>com.ericsson.oss.mediation.model.nrm.function</groupId>
+             <artifactId>node-model-common-parent</artifactId>
+             <version>1.1.211</version>
+        </parent>
+	
+	<groupId>com.ericsson.oss.mediation.model.nrm.function</groupId>
+	<artifactId>ccd-node-model-common</artifactId>
+	<version>1.2.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>[${project.artifactId}] Model Project</name>
+	<description>This is a template service model project</description>
+	<modules>
+		<module>ccd-node-model-common-jar</module>
+		<module>ccd-node-model-common-models</module>
+		<module>ccd-node-model-common-ci-model-jar</module>
+		<module>ERICccdnodemodelcommon_CXP9043590</module>
+	</modules>
+	<properties>
+		<!-- Always use the latest stable Modeling BOM -->
+		<version.modeling-bom>21.8.10</version.modeling-bom>
+		<!-- Versions for plugins must be explicitly defined. The versions of Annotation 
+			Processor, Model Processing and Model Deployment Tool should always be the 
+			same as the managed versions from the Modeling BOM -->
+		<version.annotation-processor.plugin>3.43.2</version.annotation-processor.plugin>
+		<version.model-processing.plugin>1.54.2</version.model-processing.plugin>
+		<version.mdt.plugin>9.27.2</version.mdt.plugin>
+		<version.com-ci-model>1.13.1</version.com-ci-model>
+		<version.top.ci>1.0.10</version.top.ci>
+		<version.networkelementdefmodel>3.53.1</version.networkelementdefmodel>
+		<version.geolocationmodel>1.6.7</version.geolocationmodel>
+		<version.model-processing>2.0.5</version.model-processing>
+		<version.annotation-processor.plugin>3.6.1</version.annotation-processor.plugin>
+		<version.osstopmodel>2.9.1</version.osstopmodel>
+		<version.modeling-annotation-processor-jar>3.25.2</version.modeling-annotation-processor-jar>
+<ericsson.scm.url>scm:git:[fetch=]ssh://gerritmirror-ha.lmera.ericsson.se:29418/OSS/ENM-Parent/SQ-Gate/com.ericsson.oss.mediation.model.nrm.function/ccd-node-model-common[push=]ssh://gerrit.ericsson.se:29418/OSS/ENM-Parent/SQ-Gate/com.ericsson.oss.mediation.model.nrm.function/ccd-node-model-common</ericsson.scm.url>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.ericsson.oss.itpf.modeling</groupId>
+				<artifactId>Modeling-BOM</artifactId>
+				<version>${version.modeling-bom}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<!--Profile to deploy latest site -->
+	<profiles>
+		<profile>
+			<id>site_latest</id>
+			<distributionManagement>
+				<site>
+					<id>site</id>
+					<name>Site</name>
+					<url>${site.url}/ccd-node-model-common/latest</url>
+				</site>
+			</distributionManagement>
+		</profile>
+
+		<!--Profile to stage site for review -->
+
+		<profile>
+			<id>site_review</id>
+			<distributionManagement>
+				<site>
+					<id>site</id>
+					<name>Site</name>
+					<url>${site.url}</url>
+				</site>
+			</distributionManagement>
+		</profile>
+	</profiles>
+
+	<!--Deployment of versioned documentation -->
+	<distributionManagement>
+		<site>
+			<id>site</id>
+			<name>Site</name>
+			<url>${site.url}/ccd-node-model-common/${project.version}</url>
+		</site>
+	</distributionManagement>
+
+	<scm>
+		<developerConnection>${ericsson.scm.url}</developerConnection>
+		<connection>${ericsson.scm.url}</connection>
+		<tag>HEAD</tag>
+	</scm>
+
+</project>

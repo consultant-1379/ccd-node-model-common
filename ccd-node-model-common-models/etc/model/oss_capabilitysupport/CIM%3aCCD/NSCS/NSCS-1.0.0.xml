@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oss_capabilitysupport:CapabilitySupportDefinition
+        oss_common:lifeCycle="CURRENT"
+        oss_common:name="NSCS"
+        oss_common:ns="CIM:CCD"
+        oss_common:version="1.0.0"
+        xmlns:oss_capabilitysupport="urn:com:ericsson:schema:xml:oss:oss_capabilitysupport"
+        xmlns:oss_common="urn:com:ericsson:schema:xml:oss:oss_common"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <oss_common:modelCreationInfo
+            author="raisers"
+            creationDate="2023-09-22">
+        <oss_common:designedModel componentId="ccd-node-model-common" />
+    </oss_common:modelCreationInfo>
+    <oss_common:desc>NSCS Capability Support for Target type CCD.</oss_common:desc>
+
+    <oss_capabilitysupport:capability name="isCertificateManagementSupported" value="FALSE" />
+    <oss_capabilitysupport:capability name="isLdapCommonUserSupported" value="FALSE" />
+
+    <oss_capabilitysupport:complexCapability name="credentialsParams">
+        <oss_capabilitysupport:value xsi:type="oss_common:mapValue">
+            <oss_common:mapEntries>
+                <oss_common:mapEntry>
+                    <oss_common:key
+                            xsi:type="oss_common:stringValue"
+                            value="expected"/>
+                    <oss_common:value xsi:type="oss_common:collectionValue">
+                        <oss_common:values>
+                            <oss_common:value
+                                    xsi:type="oss_common:stringValue"
+                                    value="secureusername"/>
+                            <oss_common:value
+                                    xsi:type="oss_common:stringValue"
+                                    value="secureuserpassword"/>
+                        </oss_common:values>
+                    </oss_common:value>
+                </oss_common:mapEntry>
+                <oss_common:mapEntry>
+                    <oss_common:key
+                            xsi:type="oss_common:stringValue"
+                            value="unexpected"/>
+                    <oss_common:value xsi:type="oss_common:collectionValue">
+                        <oss_common:values>
+                            <oss_common:value
+                                    xsi:type="oss_common:stringValue"
+                                    value="rootusername"/>
+                            <oss_common:value
+                                    xsi:type="oss_common:stringValue"
+                                    value="rootuserpassword"/>
+                            <oss_common:value
+                                    xsi:type="oss_common:stringValue"
+                                    value="normalusername"/>
+                            <oss_common:value
+                                    xsi:type="oss_common:stringValue"
+                                    value="normaluserpassword"/>
+                        </oss_common:values>
+                    </oss_common:value>
+                </oss_common:mapEntry>
+            </oss_common:mapEntries>
+        </oss_capabilitysupport:value>
+    </oss_capabilitysupport:complexCapability>
+
+    <oss_capabilitysupport:complexCapability name="unsupportedSecadmCliCommands">
+        <oss_capabilitysupport:value xsi:type="oss_common:collectionValue">
+            <oss_common:values>
+                <oss_common:value xsi:type="oss_common:stringValue" value="sshkey"/>
+                <oss_common:value xsi:type="oss_common:stringValue" value="snmp"/>
+                <oss_common:value xsi:type="oss_common:stringValue" value="securitylevel"/>
+                <oss_common:value xsi:type="oss_common:stringValue" value="ipsec"/>
+                <oss_common:value xsi:type="oss_common:stringValue" value="crlcheck"/>
+                <oss_common:value xsi:type="oss_common:stringValue" value="crldownload"/>
+                <oss_common:value xsi:type="oss_common:stringValue" value="ciphers"/>
+                <oss_common:value xsi:type="oss_common:stringValue" value="rtsel"/>
+                <oss_common:value xsi:type="oss_common:stringValue" value="https"/>
+                <oss_common:value xsi:type="oss_common:stringValue" value="ftpes"/>
+                <oss_common:value xsi:type="oss_common:stringValue" value="laad"/>
+            </oss_common:values>
+        </oss_capabilitysupport:value>
+    </oss_capabilitysupport:complexCapability>
+</oss_capabilitysupport:CapabilitySupportDefinition>
